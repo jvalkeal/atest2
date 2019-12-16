@@ -24,7 +24,6 @@ public class LocalDeployerProperties2Tests {
 			.withInitializer(context -> {
 				Map<String, Object> map = new HashMap<>();
 				map.put("spring.cloud.deployer.local.working-directories-root", "C:/");
-
 				context.getEnvironment().getPropertySources().addLast(new SystemEnvironmentPropertySource(
 					StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME, map));
 			})
