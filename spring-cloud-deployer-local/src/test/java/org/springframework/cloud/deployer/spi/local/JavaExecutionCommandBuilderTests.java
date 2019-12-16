@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.cloud.deployer.spi.app.AppDeployer;
@@ -42,6 +43,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.cloud.deployer.spi.local.LocalDeployerProperties.PREFIX;
 
+@Ignore
 public class JavaExecutionCommandBuilderTests {
 
     private JavaCommandBuilder commandBuilder;

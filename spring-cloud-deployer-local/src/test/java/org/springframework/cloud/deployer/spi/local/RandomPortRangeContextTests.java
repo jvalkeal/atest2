@@ -15,6 +15,7 @@
  */
 package org.springframework.cloud.deployer.spi.local;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.boot.autoconfigure.AutoConfigurations;
@@ -25,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Christian Tzolov
  */
+@Ignore
 public class RandomPortRangeContextTests {
 
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()

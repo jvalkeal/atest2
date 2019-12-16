@@ -27,6 +27,7 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,7 @@ import static org.springframework.cloud.deployer.spi.test.EventuallyMatcher.even
  * @author Janne Valkealahti
  * @author Ilayaperumal Gopinathan
  */
+@Ignore
 @SpringBootTest(classes = { Config.class, AbstractIntegrationTests.Config.class }, value = {
 		"maven.remoteRepositories.springRepo.url=https://repo.spring.io/libs-snapshot",
 		"spring.cloud.deployer.local.use-spring-application-json=false" })

@@ -16,11 +16,13 @@
 package org.springframework.cloud.deployer.spi.local;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Mark Pollack
  */
+@Ignore
 public class RandomPortTests {
 
 	private AbstractLocalDeployerSupport localDeployerSupport;

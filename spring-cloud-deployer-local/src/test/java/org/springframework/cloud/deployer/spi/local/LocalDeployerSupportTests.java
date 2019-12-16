@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.apache.http.client.config.RequestConfig;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.cloud.deployer.spi.core.AppDefinition;
@@ -41,6 +42,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author Thomas Risberg
  */
+@Ignore
 public class LocalDeployerSupportTests {
 
 	private LocalDeployerProperties localDeployerProperties;

@@ -17,6 +17,7 @@ package org.springframework.cloud.deployer.spi.local;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertThat;
@@ -24,6 +25,7 @@ import static org.junit.Assert.assertThat;
 /**
  * @author Christian Tzolov
  */
+@Ignore
 public class RandomPortRangeTests {
 
 	private AbstractLocalDeployerSupport localDeployerSupport;

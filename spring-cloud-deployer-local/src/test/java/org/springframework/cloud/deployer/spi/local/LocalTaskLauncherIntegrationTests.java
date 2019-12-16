@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -79,6 +80,7 @@ import static org.springframework.cloud.deployer.spi.test.EventuallyMatcher.even
  * @author Ilayaperumal Gopinathan
  *
  */
+@Ignore
 @SpringBootTest(classes = {Config.class, AbstractIntegrationTests.Config.class}, value = {
 		"maven.remoteRepositories.springRepo.url=https://repo.spring.io/libs-snapshot" })
 public class LocalTaskLauncherIntegrationTests extends AbstractTaskLauncherIntegrationTests {

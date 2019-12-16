@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.springframework.cloud.deployer.resource.docker.DockerResource;
@@ -37,6 +38,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author Eric Bottard
  */
+@Ignore
 public class DockerCommandBuilderTests {
 
 	private DockerCommandBuilder commandBuilder = new DockerCommandBuilder();

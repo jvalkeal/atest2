@@ -37,6 +37,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,6 +84,7 @@ import static org.springframework.cloud.deployer.spi.test.EventuallyMatcher.even
  * @author Janne Valkealahti
  * @author Ilayaperumal Gopinathan
  */
+@Ignore
 @SpringBootTest(classes = {Config.class, AbstractIntegrationTests.Config.class}, value = {
 		"maven.remoteRepositories.springRepo.url=https://repo.spring.io/libs-snapshot" })
 public class LocalAppDeployerIntegrationTests extends AbstractAppDeployerIntegrationTests {
