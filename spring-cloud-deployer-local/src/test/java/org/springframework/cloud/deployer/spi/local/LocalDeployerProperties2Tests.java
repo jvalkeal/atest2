@@ -28,6 +28,7 @@ public class LocalDeployerProperties2Tests {
 				context.getEnvironment().getPropertySources().addLast(new SystemEnvironmentPropertySource(
 					StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME, map));
 			})
+
 			.withUserConfiguration(Config1.class)
 			.run((context) -> {
 				LocalDeployerProperties properties = context.getBean(LocalDeployerProperties.class);
