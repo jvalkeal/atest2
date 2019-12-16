@@ -2,6 +2,9 @@ package org.springframework.cloud.deployer.spi.local;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +20,20 @@ public class LocalDeployerProperties2Tests {
 
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner();
 
+	// @Test
+	// public void test1() throws Exception {
+	// 	URI uri = new URI("file:/C:/tmp");
+	// 	Path path = Paths.get(uri);
+	// 	assertThat(path).isNotNull();
+	// }
+
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	public void testOnWindows() {
 		this.contextRunner
 			.withInitializer(context -> {
 				Map<String, Object> map = new HashMap<>();
-				map.put("spring.cloud.deployer.local.working-directories-root", "C:/");
+				map.put("spring.cloud.deployer.local.working-directories-root", "file:/C:/tmp");
 
 				context.getEnvironment().getPropertySources().addLast(new SystemEnvironmentPropertySource(
 					StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME, map));
@@ -33,7 +43,7 @@ public class LocalDeployerProperties2Tests {
 			.run((context) -> {
 				LocalDeployerProperties properties = context.getBean(LocalDeployerProperties.class);
 				assertThat(properties.getWorkingDirectoriesRoot()).isNotNull();
-				assertThat(properties.getWorkingDirectoriesRoot()).isEqualTo("C:/");
+				assertThat(properties.getWorkingDirectoriesRoot().toString()).isEqualTo("/C:/tmp");
 			});
 	}
 
