@@ -34,7 +34,6 @@ public class LocalDeployerProperties2Tests {
 			.withInitializer(context -> {
 				Map<String, Object> map = new HashMap<>();
 				map.put("spring.cloud.deployer.local.working-directories-root", "file:/C:/tmp");
-
 				context.getEnvironment().getPropertySources().addLast(new SystemEnvironmentPropertySource(
 					StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME, map));
 			})
@@ -43,7 +42,7 @@ public class LocalDeployerProperties2Tests {
 			.run((context) -> {
 				LocalDeployerProperties properties = context.getBean(LocalDeployerProperties.class);
 				assertThat(properties.getWorkingDirectoriesRoot()).isNotNull();
-				assertThat(properties.getWorkingDirectoriesRoot().toString()).isEqualTo("/C:/tmp");
+				assertThat(properties.getWorkingDirectoriesRoot().toString()).isEqualTo("C:/tmp");
 			});
 	}
 
