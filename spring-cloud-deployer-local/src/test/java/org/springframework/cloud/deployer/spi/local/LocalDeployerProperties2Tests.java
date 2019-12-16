@@ -42,7 +42,7 @@ public class LocalDeployerProperties2Tests {
 			.run((context) -> {
 				LocalDeployerProperties properties = context.getBean(LocalDeployerProperties.class);
 				assertThat(properties.getWorkingDirectoriesRoot()).isNotNull();
-				assertThat(properties.getWorkingDirectoriesRoot().toString()).isEqualTo("C:/tmp");
+				assertThat(properties.getWorkingDirectoriesRoot().toString()).isEqualTo("C:\\tmp");
 			});
 	}
 
