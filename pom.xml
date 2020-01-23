@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud-skipper.version>1.2.3</spring-cloud-skipper.version>
+		<spring-cloud-skipper.version>1.2.4</spring-cloud-skipper.version>
 	</properties>
 
 	<dependencies>
