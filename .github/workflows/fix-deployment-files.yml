@@ -41,3 +41,5 @@ jobs:
         labels: report, automated pr
         assignees: jvalkeal
         reviewers: jvalkeal
+        branch: github-actions/update-deployment-files
+
