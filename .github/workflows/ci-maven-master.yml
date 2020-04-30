@@ -6,11 +6,13 @@ on:
       - master
       - test
       - foo
+      - jee
   pull_request:
     branches:
       - master
       - test
       - foo
+      - jee
 
 jobs:
   build:
