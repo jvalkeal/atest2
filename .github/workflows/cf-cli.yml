@@ -25,7 +25,7 @@ jobs:
       run: cf -v
 
     - name: CF Login
-      run: cf login -a $CF_API -u CF_USERNAME -o CF_ORG -s CF_SPACE -p CF_PASSWORD
+      run: cf login -a $CF_API -u $CF_USERNAME -o $CF_ORG -s $CF_SPACE -p $CF_PASSWORD
       env:
         CF_API: ${{ secrets.CF_API }}
         CF_ORG: ${{ secrets.CF_ORG }}
