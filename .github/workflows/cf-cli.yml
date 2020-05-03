@@ -32,3 +32,6 @@ jobs:
         CF_SPACE: ${{ secrets.CF_SPACE }}
         CF_USERNAME: ${{ secrets.CF_USERNAME }}
         CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+
+    - name: Show apps
+      run: cf apps
