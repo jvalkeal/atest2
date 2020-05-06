@@ -3,16 +3,10 @@ name: Java CI - master
 on:
   push:
     branches:
-      - master
-      - test
-      - foo
-      - jee
+      - bar
   pull_request:
     branches:
-      - master
-      - test
-      - foo
-      - jee
+      - bar
 
 jobs:
   build:
