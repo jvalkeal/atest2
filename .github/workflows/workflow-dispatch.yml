@@ -1,0 +1,73 @@
+name: Test Workflow Dispatch
+
+on:
+  workflow_dispatch:
+    branch: [master]
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      p0:
+        description: p0'
+        required: false
+      p1:
+        description: p1'
+        required: false
+      p2:
+        description: p2'
+        required: false
+      p3:
+        description: p3'
+        required: false
+      p4:
+        description: p4'
+        required: false
+      p5:
+        description: p5'
+        required: false
+      p6:
+        description: p6'
+        required: false
+      p7:
+        description: p7'
+        required: false
+      p8:
+        description: p8'
+        required: false
+
+jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: jvalkeal/build-zoo-handler@gh6-work1
+      with:
+        pack-version: 0.11.2
+    - name: pack command
+      run: |
+        pack --version
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+    - name: Dump runner context
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: echo "$RUNNER_CONTEXT"
+    - name: Dump strategy context
+      env:
+        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+      run: echo "$STRATEGY_CONTEXT"
+    - name: Dump matrix context
+      env:
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      run: echo "$MATRIX_CONTEXT"
