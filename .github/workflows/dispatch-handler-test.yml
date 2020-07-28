@@ -27,5 +27,5 @@ jobs:
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
         repository: jvalkeal/atest1
         event-type: build-zoo-handler
-        client-payload: '{"repo": "jvalkeal/atest2", "action": "build-succeed"}'
+        client-payload: '{"build_zoo_handler":{"repo": "jvalkeal/atest2", "action": "build-succeed"}}'
 
