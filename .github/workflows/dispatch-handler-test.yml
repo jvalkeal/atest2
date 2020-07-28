@@ -5,7 +5,7 @@ on:
     inputs:
       prop21:
         description: 'prop21'
-        required: false 
+        required: false
         default: 'val21'
   repository_dispatch:
     types: [build-zoo-handler]
@@ -22,10 +22,10 @@ jobs:
       run: echo "$GITHUB_CONTEXT"
 
     - name: Notify main controller
-      uses: peter-evans/repository-dispatch@v1
+      uses: jvalkeal/build-zoo-handler@gh7-work1
       with:
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        repository: jvalkeal/atest1
-        event-type: build-zoo-handler
-        client-payload: '{"build_zoo_handler":{"repo": "jvalkeal/atest2", "action": "build-succeed"}}'
-
+        dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        dispatch-handler-owner: jvalkeal
+        dispatch-handler-repo: atest1
+        dispatch-handler-event-type: build-zoo-handler
+        dispatch-handler-client-payload-data: '{"event": "build-succeed", "prop21": "val21"}'
