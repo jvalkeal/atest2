@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.4.RELEASE</version>
+		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>org.example</groupId>
 	<artifactId>demo2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo2</name>
@@ -16,13 +16,19 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud-skipper.version>1.2.5</spring-cloud-skipper.version>
+		<test1.version>1.2.3-SNAPSHOT</test1.version>
+		<test2.version>4.5.6-SNAPSHOT</test2.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
+			<groupId>org.example</groupId>
+			<artifactId>demo3</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -46,41 +52,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>deploymentfiles</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>replace-deployment-files</id>
-								<phase>process-resources</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<overwrite>true</overwrite>
-									<outputDirectory>${basedir}/src</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${basedir}/src/templates</directory>
-											<includes>
-												<include>**/*</include>
-											</includes>
-											<filtering>true</filtering>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 
 </project>
