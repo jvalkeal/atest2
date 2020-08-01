@@ -8,7 +8,7 @@ on:
         required: true
         default: '0.0.0'
   repository_dispatch:
-    types: [build-zoo-handler]
+    types: [build-zoo-handler-build]
 
 jobs:
   build:
@@ -49,7 +49,7 @@ jobs:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
         dispatch-handler-repo: atest1
-        dispatch-handler-event-type: build-zoo-handler
+        dispatch-handler-event-type: build-zoo-handler-control
         dispatch-handler-client-payload-data: >
           {
             "event": "build-succeed",
