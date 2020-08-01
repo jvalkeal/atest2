@@ -1,4 +1,4 @@
-name: Dispatch Handler Test
+name: Dispatch Handler Test2
 
 on:
   workflow_dispatch:
@@ -21,6 +21,14 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
+    - name: Do Something
+      id: extract
+      env:
+        PROP21: ${{ github.event.inputs.prop21 }}
+      run: |
+        echo ::set-output name=PROP21::${PROP21:-val21}
+        echo ::set-output name=PROP22::val22
+
     - name: Notify main controller
       uses: jvalkeal/build-zoo-handler@gh7-work1
       with:
@@ -28,4 +36,4 @@ jobs:
         dispatch-handler-owner: jvalkeal
         dispatch-handler-repo: atest1
         dispatch-handler-event-type: build-zoo-handler
-        dispatch-handler-client-payload-data: '{"event": "build-succeed", "prop21": "val21"}'
+        dispatch-handler-client-payload-data: '{"event": "build-succeed", "prop22": "${{ steps.extract.outputs.PROP22 }}"}'
