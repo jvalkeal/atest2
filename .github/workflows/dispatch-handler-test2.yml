@@ -37,4 +37,9 @@ jobs:
         dispatch-handler-repo: atest1
         dispatch-handler-event-type: build-zoo-handler
         dispatch-handler-client-payload-data: >
-          {"event": "build-succeed", "prop22": "${{ steps.extract.outputs.PROP22 }}"}
+          {
+            "event": "build-succeed",
+            "prop22": "${{ steps.extract.outputs.PROP22 }}",
+            "owner": "jvalkeal",
+            "repo": "atest2"
+          }
