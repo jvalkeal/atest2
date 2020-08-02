@@ -43,7 +43,7 @@ jobs:
       run: jfrog rt mvn -U -B clean install
 
     # zoo
-    - name: Notify main controller
+    - name: Notify Build Zoo Handler Controller
       uses: jvalkeal/build-zoo-handler@gh7-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
