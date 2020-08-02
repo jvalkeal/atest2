@@ -1,12 +1,6 @@
 name: Dispatch Handler Test2
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'release version'
-        required: true
-        default: '0.0.0'
   repository_dispatch:
     types: [build-zoo-handler-build]
 
@@ -14,6 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
 
     # base setup
     - uses: actions/checkout@v2
@@ -40,7 +39,25 @@ jobs:
 
     # build
     - name: Build and Publish
-      run: jfrog rt mvn -U -B clean install
+      id: build
+      run: |
+        jfrog rt mvn build-helper:parse-version versions:set \
+          -DprocessAllModules=false -DgenerateBackupPoms=false \
+          -DnewVersion='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}'
+        jfrog rt mvn versions:set-property \
+          -DgenerateBackupPoms=false -Dproperty=demo3.version -DnewVersion=${{ github.event.client_payload.build_zoo_handler_context.properties.atest3_version}}
+        jfrog rt mvn -U -B clean install
+        echo ::set-output name=RELEASE_VERSION::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
+    # zoo tag
+    - name: Tag Release
+      uses: jvalkeal/build-zoo-handler@gh7-work1
+      with:
+        tag-release-username: 'github-actions[bot]'
+        tag-release-useremail: '41898282+github-actions[bot]@users.noreply.github.com'
+        tag-release-branch: ${{ steps.build.outputs.RELEASE_VERSION }}
+        tag-release-tag: ${{ steps.build.outputs.RELEASE_VERSION }}
+        tag-release-tag-prefix: v
 
     # zoo
     - name: Notify Build Zoo Handler Controller
@@ -55,5 +72,8 @@ jobs:
             "event": "build-succeed",
             "prop41": "val41",
             "owner": "jvalkeal",
-            "repo": "atest2"
+            "repo": "atest3",
+            "properties": {
+              "atest2_version": "${{ steps.build.outputs.RELEASE_VERSION }}"
+            }
           }
