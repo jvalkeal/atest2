@@ -56,11 +56,10 @@ jobs:
 
     # zoo commit
     - name: Commit Next Dev Changes
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-        git commit -a -m 'Next development version'
-        git push
+      uses: jvalkeal/build-zoo-handler@gh7-work1
+      with:
+        commit-changes-branch: master
+        commit-changes-message: Next development version
 
     # zoo notify
     - name: Notify Build Zoo Handler Controller
