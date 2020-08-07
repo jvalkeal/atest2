@@ -43,7 +43,7 @@ jobs:
     # build
     - name: Switch to Next Dev Version
       run: |
-        jfrog rt mvn build-helper:parse-version
+        jfrog rt mvn build-helper:parse-version \
           versions:set \
           -DprocessAllModules=false -DgenerateBackupPoms=false \
           -DnewVersion='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion}-SNAPSHOT' \
