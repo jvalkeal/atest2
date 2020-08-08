@@ -50,7 +50,7 @@ jobs:
         jfrog rt mvn versions:set-property \
           -DgenerateBackupPoms=false -Dproperty=demo3.version -DnewVersion=$BUILD_ZOO_HANDLER_atest3_version
         jfrog rt mvn -U -B clean install
-        echo ::set-env name=BUILD_ZOO_HANDLER_atest1_version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo ::set-env name=BUILD_ZOO_HANDLER_atest2_version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
     # zoo tag
     - name: Tag Release
