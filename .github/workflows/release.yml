@@ -72,5 +72,5 @@ jobs:
         dispatch-handler-event-type: build-zoo-handler-control-release
         dispatch-handler-client-payload-data: >
           {
-            "event": "build-succeed"
+            "event": "release-succeed"
           }
