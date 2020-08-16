@@ -1,4 +1,4 @@
-name: Build 0.0.x Snapshot
+name: Build Master Snapshot
 
 on:
   workflow_dispatch:
