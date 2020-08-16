@@ -55,6 +55,7 @@ jobs:
         dispatch-handler-owner: jvalkeal
         dispatch-handler-repo: atest1
         dispatch-handler-workflow: train-build-master-snapshot.yml
+        dispatch-handler-ref: master
         dispatch-handler-client-payload-data: >
           {
             "event": "build-succeed"
@@ -69,6 +70,7 @@ jobs:
         dispatch-handler-owner: jvalkeal
         dispatch-handler-repo: atest1
         dispatch-handler-workflow: train-build-master-snapshot.yml
+        dispatch-handler-ref: master
         dispatch-handler-client-payload-data: >
           {
             "event": "build-failed"
