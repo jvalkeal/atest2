@@ -1,0 +1,77 @@
+name: Build 0.0.x Snapshot
+
+on:
+  workflow_dispatch:
+    inputs:
+      build-zoo-handler:
+        description: 'Build Zoo Handler Payload'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    # base setup
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - uses: jvalkeal/setup-maven@v1
+      with:
+        maven-version: 3.6.2
+    - uses: jfrog/setup-jfrog-cli@v1
+      with:
+        version: 1.36.0
+      env:
+        JF_ARTIFACTORY_SPRING: ${{ secrets.JF_ARTIFACTORY_SECRET_SPRING }}
+    - name: Configure JFrog Cli
+      run: |
+        jfrog rt mvnc \
+          --server-id-resolve=spring \
+          --server-id-deploy=spring \
+          --repo-resolve-releases=libs-spring-dataflow-private-release \
+          --repo-resolve-snapshots=libs-spring-dataflow-private-snapshot \
+          --repo-deploy-releases=libs-spring-dataflow-private-release \
+          --repo-deploy-snapshots=libs-spring-dataflow-private-snapshot \
+
+    # zoo extract and ensure
+    - name: Extract Zoo Context Properties
+      uses: jvalkeal/build-zoo-handler@gh13-work1
+      with:
+        dispatch-handler-extract-context-properties: true
+
+    # build
+    - name: Build and Publish
+      id: build
+      run: |
+        jfrog rt mvn -U -B clean install
+
+    # zoo success
+    - name: Notify Build Success Zoo Handler Controller
+      uses: jvalkeal/build-zoo-handler@gh13-work1
+      with:
+        dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        dispatch-handler-owner: jvalkeal
+        dispatch-handler-repo: atest1
+        dispatch-handler-workflow: train-build-00x-snapshot.yml
+        dispatch-handler-ref: master
+        dispatch-handler-client-payload-data: >
+          {
+            "event": "build-succeed"
+          }
+
+    # zoo failure
+    - name: Notify Build Failure Zoo Handler Controller
+      if: ${{ failure() }}
+      uses: jvalkeal/build-zoo-handler@gh13-work1
+      with:
+        dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        dispatch-handler-owner: jvalkeal
+        dispatch-handler-repo: atest1
+        dispatch-handler-workflow: train-build-00x-snapshot.yml
+        dispatch-handler-ref: master
+        dispatch-handler-client-payload-data: >
+          {
+            "event": "build-failed"
+          }
