@@ -54,7 +54,7 @@ jobs:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
         dispatch-handler-repo: atest1
-        dispatch-handler-workflow: train-build-00x-snapshot.yml
+        dispatch-handler-workflow: train-build-master-snapshot.yml
         dispatch-handler-ref: master
         dispatch-handler-client-payload-data: >
           {
@@ -69,7 +69,7 @@ jobs:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
         dispatch-handler-repo: atest1
-        dispatch-handler-workflow: train-build-00x-snapshot.yml
+        dispatch-handler-workflow: train-build-master-snapshot.yml
         dispatch-handler-ref: 0.0.x
         dispatch-handler-client-payload-data: >
           {
