@@ -37,7 +37,7 @@ jobs:
 
     # zoo extract and ensure
     - name: Extract Zoo Context Properties
-      uses: jvalkeal/build-zoo-handler@main
+      uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-extract-context-properties: true
 
@@ -49,7 +49,7 @@ jobs:
 
     # zoo success
     - name: Notify Build Success Zoo Handler Controller
-      uses: jvalkeal/build-zoo-handler@main
+      uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
@@ -64,7 +64,7 @@ jobs:
     # zoo failure
     - name: Notify Build Failure Zoo Handler Controller
       if: ${{ failure() }}
-      uses: jvalkeal/build-zoo-handler@main
+      uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
