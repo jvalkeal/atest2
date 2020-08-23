@@ -1,8 +1,11 @@
 name: Release
 
 on:
-  repository_dispatch:
-    types: [build-zoo-handler-release]
+  workflow_dispatch:
+    inputs:
+      build-zoo-handler:
+        description: 'Build Zoo Handler Payload'
+        required: false
 
 jobs:
   build:
@@ -56,8 +59,8 @@ jobs:
     - name: Tag Release
       uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
-        tag-release-branch: ${{ env.BUILD_ZOO_HANDLER_atest1_version }}
-        tag-release-tag: ${{ env.BUILD_ZOO_HANDLER_atest1_version }}
+        tag-release-branch: ${{ env.BUILD_ZOO_HANDLER_atest2_version }}
+        tag-release-tag: ${{ env.BUILD_ZOO_HANDLER_atest2_version }}
         tag-release-tag-prefix: v
 
     # zoo success
@@ -65,9 +68,6 @@ jobs:
       uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        dispatch-handler-owner: jvalkeal
-        dispatch-handler-repo: atest1
-        dispatch-handler-event-type: build-zoo-handler-control-release
         dispatch-handler-client-payload-data: >
           {
             "event": "release-succeed"
@@ -79,9 +79,6 @@ jobs:
       uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        dispatch-handler-owner: jvalkeal
-        dispatch-handler-repo: atest1
-        dispatch-handler-event-type: build-zoo-handler-control-release
         dispatch-handler-client-payload-data: >
           {
             "event": "release-failed"

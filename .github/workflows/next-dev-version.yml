@@ -1,8 +1,11 @@
 name: Next Dev Version
 
 on:
-  repository_dispatch:
-    types: [build-zoo-handler-next-dev-version]
+  workflow_dispatch:
+    inputs:
+      build-zoo-handler:
+        description: 'Build Zoo Handler Payload'
+        required: false
 
 jobs:
   build:
@@ -66,9 +69,6 @@ jobs:
       uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        dispatch-handler-owner: jvalkeal
-        dispatch-handler-repo: atest1
-        dispatch-handler-event-type: build-zoo-handler-control-next-dev-version
         dispatch-handler-client-payload-data: >
           {
             "event": "next-dev-version-succeed"
@@ -80,9 +80,6 @@ jobs:
       uses: jvalkeal/build-zoo-handler@gh14-work1
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        dispatch-handler-owner: jvalkeal
-        dispatch-handler-repo: atest1
-        dispatch-handler-event-type: build-zoo-handler-control-next-dev-version
         dispatch-handler-client-payload-data: >
           {
             "event": "next-dev-version-failed"
