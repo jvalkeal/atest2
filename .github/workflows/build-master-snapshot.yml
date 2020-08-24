@@ -5,7 +5,7 @@ on:
     inputs:
       build-zoo-handler:
         description: 'Build Zoo Handler Payload'
-        required: false
+        required: true
 
 jobs:
   build:
