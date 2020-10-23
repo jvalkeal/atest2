@@ -39,7 +39,7 @@ jobs:
 
     # zoo extract and ensure
     - name: Extract Zoo Context Properties
-      uses: jvalkeal/build-zoo-handler@v0.0.3
+      uses: jvalkeal/build-zoo-handler@v0.0.4
       with:
         dispatch-handler-extract-context-properties: true
         ensure-env: |
@@ -58,7 +58,7 @@ jobs:
 
     # zoo tag
     - name: Tag Release
-      uses: jvalkeal/build-zoo-handler@v0.0.3
+      uses: jvalkeal/build-zoo-handler@v0.0.4
       with:
         tag-release-branch: ${{ env.BUILD_ZOO_HANDLER_atest1_version }}
         tag-release-tag: ${{ env.BUILD_ZOO_HANDLER_atest1_version }}
@@ -66,7 +66,7 @@ jobs:
 
     # zoo success
     - name: Notify Build Success Zoo Handler Controller
-      uses: jvalkeal/build-zoo-handler@v0.0.3
+      uses: jvalkeal/build-zoo-handler@v0.0.4
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
@@ -80,7 +80,7 @@ jobs:
     # zoo failure
     - name: Notify Build Failure Zoo Handler Controller
       if: ${{ failure() }}
-      uses: jvalkeal/build-zoo-handler@v0.0.3
+      uses: jvalkeal/build-zoo-handler@v0.0.4
       with:
         dispatch-handler-token: ${{ secrets.REPO_ACCESS_TOKEN }}
         dispatch-handler-owner: jvalkeal
