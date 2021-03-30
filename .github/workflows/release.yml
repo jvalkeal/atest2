@@ -34,7 +34,7 @@ jobs:
           --repo-resolve-snapshots=libs-staging \
           --repo-deploy-releases=libs-staging \
           --repo-deploy-snapshots=libs-staging
-        echo JFROG_CLI_BUILD_NAME=atest3-project >> $GITHUB_ENV
+        echo JFROG_CLI_BUILD_NAME=atest2-project >> $GITHUB_ENV
         echo JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV
         echo BUILD_ZOO_HANDLER_atest2_buildname=atest2-project >> $GITHUB_ENV
         echo BUILD_ZOO_HANDLER_atest2_buildnumber=$GITHUB_RUN_NUMBER >> $GITHUB_ENV
