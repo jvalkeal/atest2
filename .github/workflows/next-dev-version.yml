@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
 
     # base setup
@@ -22,18 +22,18 @@ jobs:
         maven-version: 3.6.2
     - uses: jfrog/setup-jfrog-cli@v1
       with:
-        version: 1.36.0
+        version: 1.43.2
       env:
-        JF_ARTIFACTORY_SPRING: ${{ secrets.JF_ARTIFACTORY_SECRET_SPRING }}
+        JF_ARTIFACTORY_LOCAL: ${{ secrets.JF_ARTIFACTORY_SECRET_LOCAL }}
     - name: Configure JFrog Cli
       run: |
         jfrog rt mvnc \
-          --server-id-resolve=spring \
-          --server-id-deploy=spring \
-          --repo-resolve-releases=libs-spring-dataflow-private-release \
-          --repo-resolve-snapshots=libs-spring-dataflow-private-snapshot \
-          --repo-deploy-releases=libs-spring-dataflow-private-release \
-          --repo-deploy-snapshots=libs-spring-dataflow-private-snapshot \
+          --server-id-resolve=local \
+          --server-id-deploy=local \
+          --repo-resolve-releases=libs-release \
+          --repo-resolve-snapshots=libs-snapshot \
+          --repo-deploy-releases=libs-release \
+          --repo-deploy-snapshots=libs-snapshot
 
     # zoo extract and ensure
     - name: Extract Zoo Context Properties
@@ -55,7 +55,7 @@ jobs:
           -Dproperty=demo3.version \
           -DnewVersion=$BUILD_ZOO_HANDLER_atest3_version
         jfrog rt mvn -U -B clean install -DskipTests
-        echo ::set-env name=BUILD_ZOO_HANDLER_atest2_version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo BUILD_ZOO_HANDLER_atest2_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
 
     # zoo commit
     - name: Commit Next Dev Changes

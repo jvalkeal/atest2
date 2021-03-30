@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
 
     # base setup
@@ -22,18 +22,22 @@ jobs:
         maven-version: 3.6.2
     - uses: jfrog/setup-jfrog-cli@v1
       with:
-        version: 1.36.0
+        version: 1.43.2
       env:
-        JF_ARTIFACTORY_SPRING: ${{ secrets.JF_ARTIFACTORY_SECRET_SPRING }}
+        JF_ARTIFACTORY_LOCAL: ${{ secrets.JF_ARTIFACTORY_SECRET_LOCAL }}
     - name: Configure JFrog Cli
       run: |
         jfrog rt mvnc \
-          --server-id-resolve=spring \
-          --server-id-deploy=spring \
-          --repo-resolve-releases=libs-spring-dataflow-private-release \
-          --repo-resolve-snapshots=libs-spring-dataflow-private-snapshot \
-          --repo-deploy-releases=libs-spring-dataflow-private-release \
-          --repo-deploy-snapshots=libs-spring-dataflow-private-snapshot \
+          --server-id-resolve=local \
+          --server-id-deploy=local \
+          --repo-resolve-releases=libs-staging \
+          --repo-resolve-snapshots=libs-staging \
+          --repo-deploy-releases=libs-staging \
+          --repo-deploy-snapshots=libs-staging
+        echo JFROG_CLI_BUILD_NAME=atest3-project >> $GITHUB_ENV
+        echo JFROG_CLI_BUILD_NUMBER=$GITHUB_RUN_NUMBER >> $GITHUB_ENV
+        echo BUILD_ZOO_HANDLER_atest2_buildname=atest2-project >> $GITHUB_ENV
+        echo BUILD_ZOO_HANDLER_atest2_buildnumber=$GITHUB_RUN_NUMBER >> $GITHUB_ENV
 
     # zoo extract and ensure
     - name: Extract Zoo Context Properties
@@ -42,12 +46,6 @@ jobs:
         dispatch-handler-extract-context-properties: true
         ensure-env: |
           BUILD_ZOO_HANDLER_atest3_version
-
-    # build
-    - name: Echo
-      run: |
-        echo BUILD_ZOO_HANDLER_atest2_version_postfix ${BUILD_ZOO_HANDLER_atest2_version_postfix}
-        echo BUILD_ZOO_HANDLER_atest_version_postfix ${BUILD_ZOO_HANDLER_atest_version_postfix}
 
     # build
     - name: Build and Publish
@@ -59,7 +57,7 @@ jobs:
         jfrog rt mvn versions:set-property \
           -DgenerateBackupPoms=false -Dproperty=demo3.version -DnewVersion=$BUILD_ZOO_HANDLER_atest3_version
         jfrog rt mvn -U -B clean install
-        echo ::set-env name=BUILD_ZOO_HANDLER_atest2_version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo BUILD_ZOO_HANDLER_atest2_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
 
     # zoo tag
     - name: Tag Release
